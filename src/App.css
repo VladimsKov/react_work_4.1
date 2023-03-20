@@ -1,0 +1,29 @@
+#root {
+  display: flex;
+  height: 100vh;  
+}
+
+.container {
+  width: 100px;
+  margin: auto;
+  font-size: 12px;
+}
+
+#inputfield {
+  display: block;
+  width: 100px;
+  box-sizing: border-box;
+  margin-bottom: 5px;
+  font-size: 12px;
+  line-height: 30px;
+  text-align: center;
+  outline: none;
+  border: none;
+}
+
+#outfield {
+  min-height: 30px;
+  line-height: 30px;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.3);  
+}
