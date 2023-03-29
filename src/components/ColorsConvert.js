@@ -7,40 +7,36 @@ bgElem.style.backgroundColor = 'gray';
 export default function ColorsConvert() {
   const[color, setColor] = useState('');
   const[rgbColor, setRgbColor] = useState('');
-    
-  const colorChange = (evt) => {    
+  
+  const colorChange = (evt) => {        
     setColor(()=> evt.target.value);
-    setRgbColor(()=> '');
-    bgElem.style.backgroundColor = "gray";          
-  }
-  const outPutColor = (evt) => {
-    evt.preventDefault();
-    let outColor = hexRgb(color);
-    outColor = outColor?  `rgb(${outColor.r}, ${outColor.g}, ${outColor.b})` : "ошибка";
-    if (!color) outColor = '';
-    setRgbColor(()=> outColor);
-    switch (outColor) {
-      case "ошибка" : bgElem.style.backgroundColor = "red";
-      break;
-      case '' : bgElem.style.backgroundColor = "gray";
-      break;
-      default: bgElem.style.backgroundColor = outColor;  
+    if (evt.target.value.length < 7) {
+      bgElem.style.backgroundColor = "gray";
+      setRgbColor(()=> ""); 
+    } else {      
+      let outColor = hexRgb(evt.target.value);
+      outColor = outColor?  `rgb(${outColor.r}, ${outColor.g}, ${outColor.b})` : "ошибка";
+      if (outColor === "ошибка") {
+        bgElem.style.backgroundColor = "red";
+      } else {
+        bgElem.style.backgroundColor = outColor;
+      }     
+      setRgbColor(()=> outColor);      
     }    
   }
   
   return (
     <div className="container">
-    <form onSubmit={outPutColor}>         
+    <form onSubmit={(evt)=> evt.preventDefault()}>         
     <input id="inputfield" 
     value={color}
-    onChange={colorChange}
-    onBlur={outPutColor}
+    onChange={colorChange}    
     autoFocus/>
     </form>
     <div id="outfield">{rgbColor}</div>
     </div>  
     )
-  } 
+  }
   
   
   
